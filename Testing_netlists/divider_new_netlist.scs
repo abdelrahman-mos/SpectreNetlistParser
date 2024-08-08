@@ -1,0 +1,429 @@
+// Generated for: spectre
+// Generated on: Aug  7 12:06:50 2024
+// Design library name: NTI_Project
+// Design cell name: divider_TB
+// Design view name: schematic
+simulator lang=spectre
+global 0 vdd!
+parameters _EXPR_21=2.5e-07 fin=8G p0=0 p1=0 p2=0 p3=1 p4=0 p5=0 s0=0 s1=0 \
+    s2=0 s3=0
+include "/home/centos/tsmc65nm/models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt
+
+// Library name: NTI_Project
+// Cell name: cml_or
+// View name: schematic
+subckt cml_or A A_b B B_b DGND DVDD OUT OUT_b
+    M2 (net09 B_b net011 0) nch l=60n w=15.0u m=1 nf=1 sd=200n \
+        ad=2.625e-12 as=2.625e-12 pd=30.35u ps=30.35u nrd=0.00666667 \
+        nrs=0.00666667 sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M3 (OUT_b B net011 0) nch l=60n w=15.0u m=1 nf=1 sd=200n ad=2.625e-12 \
+        as=2.625e-12 pd=30.35u ps=30.35u nrd=0.00666667 nrs=0.00666667 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M0 (OUT A_b net09 0) nch l=60n w=6u m=1 nf=1 sd=200n ad=1.05e-12 \
+        as=1.05e-12 pd=12.35u ps=12.35u nrd=0.0166667 nrs=0.0166667 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M1 (OUT_b A net09 0) nch l=60n w=6u m=1 nf=1 sd=200n ad=1.05e-12 \
+        as=1.05e-12 pd=12.35u ps=12.35u nrd=0.0166667 nrs=0.0166667 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    I0 (net011 DGND) isource dc=750u type=dc
+    R0 (DVDD OUT_b) resistor r=400
+    R1 (DVDD OUT) resistor r=400
+ends cml_or
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: cml_and
+// View name: schematic
+subckt cml_and A A_b B B_b DGND DVDD OUT OUT_b
+    M3 (OUT B_b net18 0) nch l=60n w=15.0u m=1 nf=1 sd=200n ad=2.625e-12 \
+        as=2.625e-12 pd=30.35u ps=30.35u nrd=0.00666667 nrs=0.00666667 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M1 (OUT A_b net13 0) nch l=60n w=6u m=1 nf=1 sd=200n ad=1.05e-12 \
+        as=1.05e-12 pd=12.35u ps=12.35u nrd=0.0166667 nrs=0.0166667 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M0 (OUT_b A net13 0) nch l=60n w=6u m=1 nf=1 sd=200n ad=1.05e-12 \
+        as=1.05e-12 pd=12.35u ps=12.35u nrd=0.0166667 nrs=0.0166667 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M2 (net13 B net18 0) nch l=60n w=15.0u m=1 nf=1 sd=200n ad=2.625e-12 \
+        as=2.625e-12 pd=30.35u ps=30.35u nrd=0.00666667 nrs=0.00666667 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    R1 (DVDD OUT_b) resistor r=400
+    R0 (DVDD OUT) resistor r=400
+    I0 (net18 DGND) isource dc=750u type=dc
+ends cml_and
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: CML_latch_new
+// View name: schematic
+subckt CML_latch_new CLK CLK_b D DGND DVDD D_b Q Q_b R_b
+    M11 (Q Q_b1 net010 DGND) nch l=60n w=13.2u m=1 nf=1 sd=200n \
+        ad=2.31e-12 as=2.31e-12 pd=26.75u ps=26.75u nrd=0.00757576 \
+        nrs=0.00757576 sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M10 (net015 CLK_b net013 DGND) nch l=60n w=12.95u m=1 nf=1 sd=200n \
+        ad=2.26625e-12 as=2.26625e-12 pd=26.25u ps=26.25u nrd=0.00772201 \
+        nrs=0.00772201 sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M9 (Q_b Q net015 DGND) nch l=60n w=25.0u m=1 nf=1 sd=200n ad=4.375e-12 \
+        as=4.375e-12 pd=50.35u ps=50.35u nrd=0.004 nrs=0.004 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M8 (Q Q_b net015 DGND) nch l=60n w=25.0u m=1 nf=1 sd=200n ad=4.375e-12 \
+        as=4.375e-12 pd=50.35u ps=50.35u nrd=0.004 nrs=0.004 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M7 (net010 CLK net013 DGND) nch l=60n w=12.95u m=1 nf=1 sd=200n \
+        ad=2.26625e-12 as=2.26625e-12 pd=26.25u ps=26.25u nrd=0.00772201 \
+        nrs=0.00772201 sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M6 (Q_b Q1 net010 DGND) nch l=60n w=13.2u m=1 nf=1 sd=200n ad=2.31e-12 \
+        as=2.31e-12 pd=26.75u ps=26.75u nrd=0.00757576 nrs=0.00757576 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M5 (net2 CLK net16 DGND) nch l=60n w=12.95u m=1 nf=1 sd=200n \
+        ad=2.26625e-12 as=2.26625e-12 pd=26.25u ps=26.25u nrd=0.00772201 \
+        nrs=0.00772201 sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M4 (Q1 Q_b1 net2 DGND) nch l=60n w=25.0u m=1 nf=1 sd=200n ad=4.375e-12 \
+        as=4.375e-12 pd=50.35u ps=50.35u nrd=0.004 nrs=0.004 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M3 (Q_b1 Q1 net2 DGND) nch l=60n w=25.0u m=1 nf=1 sd=200n ad=4.375e-12 \
+        as=4.375e-12 pd=50.35u ps=50.35u nrd=0.004 nrs=0.004 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M2 (net1 CLK_b net16 DGND) nch l=60n w=12.95u m=1 nf=1 sd=200n \
+        ad=2.26625e-12 as=2.26625e-12 pd=26.25u ps=26.25u nrd=0.00772201 \
+        nrs=0.00772201 sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M1 (Q1 D_b net1 DGND) nch l=60n w=13.2u m=1 nf=1 sd=200n ad=2.31e-12 \
+        as=2.31e-12 pd=26.75u ps=26.75u nrd=0.00757576 nrs=0.00757576 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M0 (Q_b1 D net1 DGND) nch l=60n w=13.2u m=1 nf=1 sd=200n ad=2.31e-12 \
+        as=2.31e-12 pd=26.75u ps=26.75u nrd=0.00757576 nrs=0.00757576 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    R3 (DVDD Q) resistor r=350
+    R2 (DVDD Q_b) resistor r=350
+    R1 (DVDD Q_b1) resistor r=350
+    R0 (DVDD Q1) resistor r=350
+    I10 (net013 DGND) isource dc=860u type=dc
+    I1 (net16 DGND) isource dc=860u type=dc
+    M12 (Q_b R_b DVDD DVDD) pch l=60n w=10u m=1 nf=1 sd=200n ad=1.75e-12 \
+        as=1.75e-12 pd=20.35u ps=20.35u nrd=0.01 nrs=0.01 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+ends CML_latch_new
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: Dual_Modulus
+// View name: schematic
+subckt Dual_Modulus CLK CLK_b DGND DVDD MC MC_b Q OUT_b
+    I30 (net09 net021 MC MC_b DGND DVDD net013 net016) cml_or
+    I27 (OUT_b Q net013 net016 DGND DVDD D net012) cml_and
+    I24 (CLK CLK_b D DGND DVDD net012 Q OUT_b DVDD) CML_latch_new
+    I23 (CLK CLK_b OUT_b DGND DVDD Q net09 net021 DVDD) CML_latch_new
+ends Dual_Modulus
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: xnor_tgx
+// View name: schematic
+subckt xnor_tgx A B DGND DVDD OUT
+    M5 (OUT B A DGND) nch l=120.0n w=960.0n m=1 nf=4 sd=200n ad=9.6e-14 \
+        as=1.32e-13 pd=1.76u ps=2.54u nrd=0.104167 nrs=0.104167 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M3 (B_b B DGND DGND) nch l=60n w=120.0n m=1 nf=1 sd=350.0n ad=3.45e-14 \
+        as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 sa=100n \
+        sb=100n sca=0 scb=0 scc=0
+    M0 (OUT A B DGND) nch l=60n w=120.0n m=1 nf=1 sd=350.0n ad=3.45e-14 \
+        as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 sa=100n \
+        sb=100n sca=0 scb=0 scc=0
+    M4 (OUT B_b A DVDD) pch l=60n w=200n m=1 nf=1 sd=200n ad=3.45e-14 \
+        as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M2 (B_b B DVDD DVDD) pch l=60n w=240.0n m=1 nf=2 sd=350.0n ad=3.45e-14 \
+        as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 sa=100n \
+        sb=100n sca=0 scb=0 scc=0
+    M1 (OUT A B_b DVDD) pch l=60n w=240.0n m=1 nf=2 sd=350.0n ad=3.45e-14 \
+        as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 sa=100n \
+        sb=100n sca=0 scb=0 scc=0
+ends xnor_tgx
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: TSPC_FF
+// View name: schematic
+subckt TSPC_FF CLK D DGND DVDD Q Q_b R
+    M16 (net08 R DGND DGND) nch l=60n w=960.0n m=1 nf=8 sd=350.0n \
+        ad=1.86e-13 as=2.085e-13 pd=4u ps=4.6u nrd=0.182292 nrs=0.182292 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M10 (Q Q_b DGND DGND) nch l=60n w=120.0n m=4**1 nf=1 sd=350.0n \
+        ad=3.45e-14 as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M7 (net020 net08 DGND DGND) nch l=60n w=240.0n m=1 nf=2 sd=350.0n \
+        ad=4.65e-14 as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M6 (Q_b CLK net020 DGND) nch l=60n w=240.0n m=1 nf=2 sd=350.0n \
+        ad=4.65e-14 as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M4 (net02 CLK DGND DGND) nch l=60n w=240.0n m=1 nf=2 sd=350.0n \
+        ad=4.65e-14 as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M3 (net08 net010 net02 DGND) nch l=60n w=240.0n m=1 nf=2 sd=350.0n \
+        ad=4.65e-14 as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M1 (net010 D DGND DGND) nch l=60n w=120.0n m=1 nf=1 sd=350.0n \
+        ad=3.45e-14 as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M9 (Q Q_b DVDD DVDD) pch l=60n w=240.0n m=4**1 nf=2 sd=350.0n \
+        ad=4.65e-14 as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M8 (Q_b net08 DVDD DVDD) pch l=60n w=480.0n m=1 nf=4 sd=350.0n \
+        ad=9.3e-14 as=1.155e-13 pd=2u ps=2.6u nrd=0.364583 nrs=0.364583 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M5 (net08 CLK DVDD DVDD) pch l=60n w=480.0n m=1 nf=4 sd=350.0n \
+        ad=9.3e-14 as=1.155e-13 pd=2u ps=2.6u nrd=0.364583 nrs=0.364583 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M2 (net3 D DVDD DVDD) pch l=60n w=960.0n m=1 nf=8 sd=350.0n \
+        ad=1.86e-13 as=2.085e-13 pd=4u ps=4.6u nrd=0.182292 nrs=0.182292 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M0 (net010 CLK net3 DVDD) pch l=60n w=960.0n m=1 nf=8 sd=350.0n \
+        ad=1.86e-13 as=2.085e-13 pd=4u ps=4.6u nrd=0.182292 nrs=0.182292 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+ends TSPC_FF
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: inv
+// View name: schematic
+subckt inv DGND DVDD IN OUT
+    M0 (OUT IN DGND DGND) nch l=60n w=120.0n m=1 nf=1 sd=350.0n \
+        ad=3.45e-14 as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M1 (OUT IN DVDD DVDD) pch l=60n w=480.0n m=1 nf=4 sd=350.0n ad=9.3e-14 \
+        as=1.155e-13 pd=2u ps=2.6u nrd=0.364583 nrs=0.364583 sa=100n \
+        sb=100n sca=0 scb=0 scc=0
+ends inv
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: or_gate
+// View name: schematic
+subckt or_gate A B DGND DVDD OUT
+    M4 (OUT net2 DGND DGND) nch l=60n w=120.0n m=1 nf=1 sd=350.0n \
+        ad=3.45e-14 as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M1 (net2 B DGND DGND) nch l=60n w=120.0n m=1 nf=1 sd=350.0n \
+        ad=3.45e-14 as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M0 (net2 A DGND DGND) nch l=60n w=120.0n m=1 nf=1 sd=350.0n \
+        ad=3.45e-14 as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M5 (OUT net2 DVDD DVDD) pch l=60n w=240.0n m=1 nf=2 sd=350.0n \
+        ad=4.65e-14 as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M3 (net10 B DVDD DVDD) pch l=60n w=480.0n m=1 nf=4 sd=350.0n \
+        ad=9.3e-14 as=1.155e-13 pd=2u ps=2.6u nrd=0.364583 nrs=0.364583 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M2 (net2 A net10 DVDD) pch l=60n w=480.0n m=1 nf=4 sd=350.0n \
+        ad=9.3e-14 as=1.155e-13 pd=2u ps=2.6u nrd=0.364583 nrs=0.364583 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+ends or_gate
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: rs_TSPC_FF
+// View name: schematic
+subckt rs_TSPC_FF CLK DGND DVDD Q Q_b R S
+    I0 (CLK net5 DGND DVDD Q net07 R) TSPC_FF
+    I1 (Q S DGND DVDD net5) or_gate
+    I7 (DGND DVDD net010 Q_b) inv
+    I5 (DGND DVDD net07 net010) inv
+ends rs_TSPC_FF
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: and_gate
+// View name: schematic
+subckt and_gate A B DGND DVDD OUT
+    M4 (OUT net3 DGND DGND) nch l=60n w=240.0n m=3 nf=2 sd=350.0n \
+        ad=4.65e-14 as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M1 (net12 B DGND DGND) nch l=60n w=240.0n m=1 nf=2 sd=350.0n \
+        ad=4.65e-14 as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M0 (net3 A net12 DGND) nch l=60n w=240.0n m=1 nf=2 sd=350.0n \
+        ad=4.65e-14 as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M5 (OUT net3 DVDD DVDD) pch l=60n w=240.0n m=3 nf=2 sd=350.0n \
+        ad=4.65e-14 as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M3 (net3 A DVDD DVDD) pch l=60n w=480.0n m=1 nf=4 sd=350.0n ad=9.3e-14 \
+        as=1.155e-13 pd=2u ps=2.6u nrd=0.364583 nrs=0.364583 sa=100n \
+        sb=100n sca=0 scb=0 scc=0
+    M2 (net3 B DVDD DVDD) pch l=60n w=480.0n m=1 nf=4 sd=350.0n ad=9.3e-14 \
+        as=1.155e-13 pd=2u ps=2.6u nrd=0.364583 nrs=0.364583 sa=100n \
+        sb=100n sca=0 scb=0 scc=0
+ends and_gate
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: S_counter
+// View name: schematic
+subckt S_counter CLK D\<0\> D\<1\> D\<2\> D\<3\> DGND DVDD OUT OUT_b r
+    I90 (D\<0\> S\<0\> DGND DVDD net10) xnor_tgx
+    I86 (S\<3\> D\<3\> DGND DVDD net23) xnor_tgx
+    I88 (D\<2\> S\<2\> DGND DVDD net19) xnor_tgx
+    I89 (S\<1\> D\<1\> DGND DVDD net14) xnor_tgx
+    I64 (net035 net12 DGND DVDD S\<1\> net12 reset) TSPC_FF
+    I65 (net12 net16 DGND DVDD S\<2\> net16 reset) TSPC_FF
+    I84 (VIN net035 DGND DVDD S\<0\> net035 reset) TSPC_FF
+    I66 (net16 net022 DGND DVDD S\<3\> net022 reset) TSPC_FF
+    I85 (DGND DVDD CLK VIN) inv
+    I96 (CLK DGND DVDD OUT OUT_b r b_in) rs_TSPC_FF
+    I95 (r OUT DGND DVDD reset) or_gate
+    I92 (net10 net027 DGND DVDD b_in) and_gate
+    I91 (net19 net23 DGND DVDD net026) and_gate
+    I93 (net14 net026 DGND DVDD net027) and_gate
+ends S_counter
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: xnor_st
+// View name: schematic
+subckt xnor_st A B DGND DVDD OUT
+    M1 (OUT B net6 DVDD) pch l=60n w=720.0n m=1 nf=6 sd=350.0n \
+        ad=1.395e-13 as=1.62e-13 pd=3u ps=3.6u nrd=0.243056 nrs=0.243056 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M0 (net6 A DVDD DVDD) pch l=60n w=720.0n m=1 nf=6 sd=350.0n \
+        ad=1.395e-13 as=1.62e-13 pd=3u ps=3.6u nrd=0.243056 nrs=0.243056 \
+        sa=100n sb=100n sca=0 scb=0 scc=0
+    M3 (OUT A B DGND) nch l=60n w=240.0n m=1 nf=2 sd=350.0n ad=4.65e-14 \
+        as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 sa=100n sb=100n \
+        sca=0 scb=0 scc=0
+    M2 (OUT B A DGND) nch l=60n w=240.0n m=1 nf=2 sd=350.0n ad=4.65e-14 \
+        as=6.9e-14 pd=1u ps=1.6u nrd=0.729167 nrs=0.729167 sa=100n sb=100n \
+        sca=0 scb=0 scc=0
+ends xnor_st
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: P_counter
+// View name: schematic
+subckt P_counter CLK D\<0\> D\<1\> D\<2\> D\<3\> D\<4\> D\<5\> DGND DVDD \
+        OUT r
+    I100 (CLK DGND DVDD OUT VOUT_B r net048) rs_TSPC_FF
+    I91 (DGND DVDD CLK VIN) inv
+    I63 (net023 net028 DGND DVDD p\<3\> net028 reset) TSPC_FF
+    I62 (net051 net023 DGND DVDD p\<2\> net023 reset) TSPC_FF
+    I64 (net028 net031 DGND DVDD p\<4\> net031 reset) TSPC_FF
+    I65 (net031 net036 DGND DVDD p\<5\> net036 reset) TSPC_FF
+    I90 (VIN net043 DGND DVDD p\<0\> net043 reset) TSPC_FF
+    I89 (net043 net051 DGND DVDD p\<1\> net051 reset) TSPC_FF
+    I99 (r OUT DGND DVDD reset) or_gate
+    I80 (D\<3\> p\<3\> DGND DVDD net047) xnor_st
+    I81 (p\<4\> D\<4\> DGND DVDD net055) xnor_st
+    I82 (D\<5\> p\<5\> DGND DVDD net035) xnor_st
+    I77 (p\<0\> D\<0\> DGND DVDD net10) xnor_st
+    I78 (D\<1\> p\<1\> DGND DVDD net14) xnor_st
+    I79 (p\<2\> D\<2\> DGND DVDD net19) xnor_st
+    I93 (net14 net054 DGND DVDD net046) and_gate
+    I95 (net047 net050 DGND DVDD net045) and_gate
+    I94 (net19 net045 DGND DVDD net054) and_gate
+    I92 (net10 net046 DGND DVDD net048) and_gate
+    I96 (net055 net035 DGND DVDD net050) and_gate
+ends P_counter
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: CML_CMOS
+// View name: schematic
+subckt CML_CMOS AGND AVDD VINN VINP VOUT
+    M10 (net020 net020 AGND AGND) nch l=200n w=2u m=1 nf=2 sd=200n \
+        ad=2e-13 as=3.5e-13 pd=2.4u ps=4.7u nrd=0.05 nrs=0.05 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M9 (net021 net020 AGND AGND) nch l=200n w=2u m=1 nf=2 sd=200n ad=2e-13 \
+        as=3.5e-13 pd=2.4u ps=4.7u nrd=0.05 nrs=0.05 sa=175.00n sb=175.00n \
+        sca=0 scb=0 scc=0
+    M11 (Vb Vb AGND AGND) nch l=1.2u w=10u m=1 nf=1 sd=200n ad=1.75e-12 \
+        as=1.75e-12 pd=20.35u ps=20.35u nrd=0.01 nrs=0.01 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M2 (net1 Vb AGND AGND) nch l=1.2u w=10u m=4 nf=1 sd=200n ad=1.75e-12 \
+        as=1.75e-12 pd=20.35u ps=20.35u nrd=0.01 nrs=0.01 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M1 (net2 VINN net1 0) nch l=60n w=6u m=2 nf=20 sd=200n ad=6e-13 \
+        as=6.45e-13 pd=10u ps=10.9u nrd=0.0166667 nrs=0.0166667 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M0 (net4 VINP net1 0) nch l=60n w=6u m=2 nf=20 sd=200n ad=6e-13 \
+        as=6.45e-13 pd=10u ps=10.9u nrd=0.0166667 nrs=0.0166667 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M8 (net4 net4 AVDD AVDD) pch l=60n w=2u m=1 nf=5 sd=200n ad=2.3e-13 \
+        as=2.3e-13 pd=3.55u ps=3.55u nrd=0.05 nrs=0.05 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M7 (net020 net4 AVDD AVDD) pch l=60n w=2u m=2 nf=5 sd=200n ad=2.3e-13 \
+        as=2.3e-13 pd=3.55u ps=3.55u nrd=0.05 nrs=0.05 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M6 (net2 net2 AVDD AVDD) pch l=60n w=2u m=1 nf=5 sd=200n ad=2.3e-13 \
+        as=2.3e-13 pd=3.55u ps=3.55u nrd=0.05 nrs=0.05 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M5 (net021 net2 AVDD AVDD) pch l=60n w=2u m=2 nf=5 sd=200n ad=2.3e-13 \
+        as=2.3e-13 pd=3.55u ps=3.55u nrd=0.05 nrs=0.05 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M4 (net4 net2 AVDD AVDD) pch l=60n w=1u m=1 nf=5 sd=200n ad=1.15e-13 \
+        as=1.15e-13 pd=2.35u ps=2.35u nrd=0.1 nrs=0.1 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M3 (net2 net4 AVDD AVDD) pch l=60n w=1u m=1 nf=5 sd=200n ad=1.15e-13 \
+        as=1.15e-13 pd=2.35u ps=2.35u nrd=0.1 nrs=0.1 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    I19 (AGND AVDD net027 VOUT) inv m=4
+    I18 (AGND AVDD net029 net027) inv m=4
+    I17 (AGND AVDD net021 net029) inv
+    I6 (AVDD Vb) isource dc=100u type=dc
+ends CML_CMOS
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: divider
+// View name: schematic
+subckt divider CLK CLK_b DGND DVDD OUT P\<0\> P\<1\> P\<2\> P\<3\> P\<4\> \
+        P\<5\> S\<0\> S\<1\> S\<2\> S\<3\>
+    I27 (Q Q_b DGND DVDD MC MC_b net08 net06) Dual_Modulus
+    I18 (A S\<0\> S\<1\> S\<2\> S\<3\> DGND DVDD MC MC_b OUT) S_counter
+    I26 (CLK CLK_b Q_b1 DGND DVDD Q1 Q1 Q_b1 DVDD) CML_latch_new
+    I29 (Q1 Q_b1 Q_b DGND DVDD Q Q Q_b DVDD) CML_latch_new
+    I21 (A P\<0\> P\<1\> P\<2\> P\<3\> P\<4\> P\<5\> DGND DVDD OUT OUT) \
+        P_counter
+    I39 (DGND DVDD net06 net08 A) CML_CMOS
+ends divider
+// End of subcircuit definition.
+
+// Library name: NTI_Project
+// Cell name: divider_TB
+// View name: schematic
+I0 (CLK CLK_b 0 vdd! d_OUT p\<0\> p\<1\> p\<2\> p\<3\> p\<4\> p\<5\> \
+        s\<0\> s\<1\> s\<2\> s\<3\>) divider
+V11 (vdd! 0) vsource dc=1.2 type=dc
+V10 (s\<3\> 0) vsource dc=s3*1.2 type=dc
+V9 (s\<2\> 0) vsource dc=s2*1.2 type=dc
+V8 (s\<1\> 0) vsource dc=s1*1.2 type=dc
+V7 (s\<0\> 0) vsource dc=s0*1.2 type=dc
+V6 (p\<4\> 0) vsource dc=p4*1.2 type=dc
+V5 (p\<5\> 0) vsource dc=p5*1.2 type=dc
+V4 (p\<3\> 0) vsource dc=p3*1.2 type=dc
+V3 (p\<2\> 0) vsource dc=p2*1.2 type=dc
+V2 (p\<1\> 0) vsource dc=p1*1.2 type=dc
+V1 (p\<0\> 0) vsource dc=p0*1.2 type=dc
+V12 (CLK_b 0) vsource type=pulse val0=1.2 val1=0 period=1/fin rise=10f \
+        fall=10f width=0.5/fin
+V0 (CLK 0) vsource type=pulse val0=0 val1=1.2 period=1/fin rise=10f \
+        fall=10f width=0.5/fin
+I32 (CLK 0 vdd! OUT OUT_b net4 d_OUT) rs_TSPC_FF
+I34 (0 vdd! net11 net4) inv
+I33 (0 vdd! d_OUT net11) inv
+simulatorOptions options reltol=1e-3 vabstol=1e-6 iabstol=1e-12 temp=27 \
+    tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 maxnotes=5 maxwarns=5 \
+    digits=5 cols=80 pivrel=1e-3 sensfile="../psf/sens.output" \
+    checklimitdest=psf 
+tran tran stop=_EXPR_21 errpreset=liberal write="spectre.ic" \
+    writefinal="spectre.fc" annotate=status maxiters=5 
+finalTimeOP info what=oppoint where=rawfile
+dcOp dc write="spectre.dc" maxiters=150 maxsteps=10000 annotate=status
+dcOpInfo info what=oppoint where=rawfile
+modelParameter info what=models where=rawfile
+element info what=inst where=rawfile
+outputParameter info what=output where=rawfile
+designParamVals info what=parameters where=rawfile
+primitives info what=primitives where=rawfile
+subckts info what=subckts where=rawfile
+saveOptions options save=allpub

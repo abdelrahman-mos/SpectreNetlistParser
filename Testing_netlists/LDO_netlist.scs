@@ -1,0 +1,63 @@
+// Generated for: spectre
+// Generated on: Aug  3 05:22:07 2024
+// Design library name: porting_65nm
+// Design cell name: LDO_PMOS
+// Design view name: schematic
+simulator lang=spectre
+global 0 vdd!
+parameters VDD=1.2 VREF=0.6 COUT=1u IB=20u IL=1m R1=800k R2=400k
+include "/home/centos/tsmc65nm/models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt
+
+// Library name: porting_65nm
+// Cell name: 5TOTA
+// View name: schematic
+subckt porting_65nm_5TOTA_schematic AGND AVDD IB VINN VINP VOUT
+    M5 (IB IB AGND AGND) nch l=1.5u w=15.0u m=1 nf=1 sd=200n ad=2.625e-12 \
+        as=2.625e-12 pd=30.35u ps=30.35u nrd=0.00666667 nrs=0.00666667 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M2 (VP IB AGND AGND) nch l=1.5u w=15.0u m=1 nf=1 sd=200n ad=2.625e-12 \
+        as=2.625e-12 pd=30.35u ps=30.35u nrd=0.00666667 nrs=0.00666667 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M1 (VOUT VINN VP AGND) nch l=1.7u w=14.0u m=1 nf=1 sd=200n ad=2.45e-12 \
+        as=2.45e-12 pd=28.35u ps=28.35u nrd=0.00714286 nrs=0.00714286 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M0 (VF VINP VP AGND) nch l=1.7u w=14.0u m=1 nf=1 sd=200n ad=2.45e-12 \
+        as=2.45e-12 pd=28.35u ps=28.35u nrd=0.00714286 nrs=0.00714286 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M4 (VF VF AVDD AVDD) pch l=1u w=25.0u m=1 nf=1 sd=200n ad=4.375e-12 \
+        as=4.375e-12 pd=50.35u ps=50.35u nrd=0.004 nrs=0.004 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+    M3 (VOUT VF AVDD AVDD) pch l=1u w=25.0u m=1 nf=1 sd=200n ad=4.375e-12 \
+        as=4.375e-12 pd=50.35u ps=50.35u nrd=0.004 nrs=0.004 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+ends porting_65nm_5TOTA_schematic
+// End of subcircuit definition.
+
+// Library name: porting_65nm
+// Cell name: LDO_PMOS
+// View name: schematic
+V3 (vdd! 0) vsource dc=VDD type=dc
+V2 (VREF 0) vsource dc=VREF type=dc
+I11 (VOUT 0) isource dc=IL type=dc
+I0 (vdd! net6) isource dc=IB type=dc
+I12 (0 vdd! net6 VREF VF VC) porting_65nm_5TOTA_schematic
+M0 (VOUT VC vdd! vdd!) pch l=100n w=16.0u m=20 nf=8 sd=200n ad=1.6e-12 \
+        as=1.9e-12 pd=17.6u ps=21.9u nrd=0.00625 nrs=0.00625 sa=175.00n \
+        sb=175.00n sca=0 scb=0 scc=0
+R1 (VF 0) resistor r=R1
+R0 (VOUT VF) resistor r=R2
+C0 (VOUT 0) capacitor c=COUT
+simulatorOptions options reltol=1e-3 vabstol=1e-6 iabstol=1e-12 temp=27 \
+    tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 maxnotes=5 maxwarns=5 \
+    digits=5 cols=80 pivrel=1e-3 sensfile="../psf/sens.output" \
+    checklimitdest=psf 
+dcOp dc write="spectre.dc" maxiters=150 maxsteps=10000 annotate=status
+dcOpInfo info what=oppoint where=rawfile
+modelParameter info what=models where=rawfile
+element info what=inst where=rawfile
+outputParameter info what=output where=rawfile
+designParamVals info what=parameters where=rawfile
+primitives info what=primitives where=rawfile
+subckts info what=subckts where=rawfile
+saveOptions options save=allpub currents=all subcktprobelvl=5 \
+    saveahdlvars=all

@@ -1,0 +1,159 @@
+// Generated for: spectre
+// Generated on: Jul  8 06:57:10 2024
+// Design library name: porting_65nm
+// Design cell name: CP_TB
+// Design view name: schematic
+simulator lang=spectre
+global 0 vdd!
+parameters ISS=40u Period=800n VDD=1.2 VL=-VDD VH=VDD PW=0.5*Period \
+    tr=PW/10 tf=PW/10
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_bip
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_33
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_mim
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_dnw
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_18
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_bip_npn
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_33
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfrtmom
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_mos_cap_25
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_18
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_disres
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_res
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_na
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmos_33
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_hvt
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmvar
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmos_18
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_na
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_na33
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_lvt
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfres_sa
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_na33
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_esd
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmim
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_25od33
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_25od33
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_mos_cap
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_25
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_25ud18
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_25
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmos
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_25ud18
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_na25od33
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfjvar
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmos_25
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rtmom
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_na25od33
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_na25
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfres_rpo
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_hvt
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfind
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmvar_25
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_na25
+include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_lvt
+
+// Library name: porting_65nm
+// Cell name: WCM
+// View name: schematic
+subckt WCM AGND AVDD Idown Iup Vb
+    M1 (Iup Vb AVDD AVDD) pch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M0 (VM Vb AVDD AVDD) pch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M7 (net016 VM AGND AGND) nch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M6 (Idown Vx net016 AGND) nch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M5 (net010 VM AGND AGND) nch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M4 (VM Vx net010 AGND) nch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M3 (Vx Vx AGND AGND) nch l=2u w=750.0n m=2 nf=1 sd=200n ad=1.3125e-13 \
+        as=1.3125e-13 pd=1.85u ps=1.85u nrd=0.133333 nrs=0.133333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M2 (AVDD AVDD Vx AGND) nch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+ends WCM
+// End of subcircuit definition.
+
+// Library name: porting_65nm
+// Cell name: Diff_pair
+// View name: schematic
+subckt Diff_pair AGND AVDD VL VR Vb
+    M3 (net9 net9 AVDD AVDD) pch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M2 (Vb Vb AVDD AVDD) pch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M1 (Vb net9 AVDD AVDD) pch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M0 (net9 Vb AVDD AVDD) pch l=2u w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M5 (net9 VR net14 AGND) nch l=600n w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    M4 (Vb VL net14 AGND) nch l=600n w=3u m=2 nf=1 sd=200n ad=5.25e-13 \
+        as=5.25e-13 pd=6.35u ps=6.35u nrd=0.0333333 nrs=0.0333333 \
+        sa=175.00n sb=175.00n sca=0 scb=0 scc=0
+    I0 (net14 AGND) isource dc=ISS type=dc
+ends Diff_pair
+// End of subcircuit definition.
+
+// Library name: porting_65nm
+// Cell name: CP
+// View name: schematic
+subckt CP AGND AVDD Down\+ Down\- I\+ I\- Up\+ Up\-
+    I1 (AGND AVDD I\- I\+ net6) WCM
+    I0 (AGND AVDD I\+ I\- net9) WCM
+    I3 (AGND AVDD Up\+ Up\- net6) Diff_pair
+    I2 (AGND AVDD Down\+ Down\- net9) Diff_pair
+ends CP
+// End of subcircuit definition.
+
+// Library name: analogLib
+// Cell name: ideal_balun
+// View name: schematic
+subckt ideal_balun d c p n
+    K0 (d 0 p c) transformer n1=2
+    K1 (d 0 c n) transformer n1=2
+ends ideal_balun
+// End of subcircuit definition.
+
+// Library name: porting_65nm
+// Cell name: CP_TB
+// View name: schematic
+I0 (0 vdd! UP\- UP\+ VOUT\+ VOUT\- UP\+ UP\-) CP
+I3 (net06 net05 UP\+ UP\-) ideal_balun
+V3 (net06 0) vsource dc=0 type=dc
+V1 (net05 0) vsource dc=VDD/2 type=dc
+V0 (vdd! 0) vsource dc=VDD type=dc
+C1 (VOUT\+ 0) capacitor c=10p ic=600m
+C0 (VOUT\- 0) capacitor c=10p ic=600m
+nodeset VOUT\-=0.6 VOUT\+=0.6 
+ic VOUT\-=0.6 VOUT\+=0.6 
+simulatorOptions options reltol=1e-3 vabstol=1e-6 iabstol=1e-12 temp=27 \
+    tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 maxnotes=5 maxwarns=5 \
+    digits=5 cols=80 pivrel=1e-3 sensfile="../psf/sens.output" \
+    checklimitdest=psf 
+dcOp dc write="spectre.dc" maxiters=150 maxsteps=10000 annotate=status
+dcOpInfo info what=oppoint where=rawfile
+modelParameter info what=models where=rawfile
+element info what=inst where=rawfile
+outputParameter info what=output where=rawfile
+designParamVals info what=parameters where=rawfile
+primitives info what=primitives where=rawfile
+subckts info what=subckts where=rawfile
+saveOptions options save=allpub currents=all subcktprobelvl=5 \
+    saveahdlvars=all
