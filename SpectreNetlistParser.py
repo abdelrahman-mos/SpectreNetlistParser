@@ -1,5 +1,6 @@
 from typing import List, Dict
 from Netlist import Netlist
+from Device import Device
 
 
 class SpectreNetlistParser:
@@ -11,7 +12,7 @@ class SpectreNetlistParser:
     @staticmethod
     def parse_netlist(path: str):
         output_netlist = Netlist(path)
-        original_text = output_netlist.original_string
+        original_text = output_netlist.original_string.lower()
         original_text_no_comments = SpectreNetlistParser.remove_comments(original_text)
         subckts_names = SpectreNetlistParser.parse_subckts(original_text_no_comments)
         original_text_no_subckts = SpectreNetlistParser.remove_subckts(original_text_no_comments)
@@ -69,6 +70,14 @@ class SpectreNetlistParser:
     @staticmethod
     def remove_commands(original_text_no_subckts: str) -> str:
         output_text = ''
+        lines = original_text_no_subckts.splitlines()
+        skip_line = False
+        for line in lines:
+            if any(cmd in line for cmd in SpectreNetlistParser.supported_commands):
+                # need to remove multilines first
+                continue
+            output_text += line + '\n'
+
         return output_text
 
     @staticmethod

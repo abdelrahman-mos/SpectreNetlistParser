@@ -6,3 +6,4 @@ class Device:
         self.terminals: List[str] = []
         self.name: str = ''
         self.parent_subckt: str = ''
+        self.type: str = ''
