@@ -6,16 +6,17 @@ from Device import Device
 class SpectreNetlistParser:
     supported_analogLib = ['vsource', 'resistor', 'vcvs', 'cvcs', 'cccs', 'ccvs', 'capacitor', 'transformer']
     supported_modelnames = ['nch', 'pch', 'nch_lvt', 'pch_lvt']
-    supported_commands = ['tran', 'dc', 'ac', 'info', 'noise', 'xf', 'pss', 'options', 'parameters', 'global',
-                          'simulator']
+    supported_spectreCommands = ['include', 'simulator', 'global', 'parameters']
+    supported_commands = ['tran', 'dc', 'ac', 'info', 'noise', 'xf', 'pss', 'options']
 
     @staticmethod
     def parse_netlist(path: str):
         output_netlist = Netlist(path)
         original_text = output_netlist.original_string.lower()
         original_text_no_comments = SpectreNetlistParser.remove_comments(original_text)
-        subckts_names = SpectreNetlistParser.parse_subckts(original_text_no_comments)
-        original_text_no_subckts = SpectreNetlistParser.remove_subckts(original_text_no_comments)
+        original_text_no_multiline = SpectreNetlistParser.remove_multilines(original_text_no_comments)
+        subckts_names = SpectreNetlistParser.parse_subckts(original_text_no_multiline)
+        original_text_no_subckts = SpectreNetlistParser.remove_subckts(original_text_no_multiline)
         original_text_no_commands = SpectreNetlistParser.remove_commands(original_text_no_subckts)
         highest_hierarchy_devices = SpectreNetlistParser.parse_highest_hierarchy(original_text_no_commands, subckts_names)
         output_netlist.subckts_names = subckts_names
@@ -33,11 +34,25 @@ class SpectreNetlistParser:
         return output_text
 
     @staticmethod
-    def parse_subckts(original_text_no_comments: str) -> List[str]:
+    def remove_multilines(original_text_no_comments: str) -> str:
+        output_text = ''
+        lines = original_text_no_comments.splitlines()
+        netlist_lines = iter(lines)
+        for line in netlist_lines:
+            if line.endswith("\\"):
+                while line.endswith("\\"):
+                    output_text += line[:-1].strip()
+                    line = next(netlist_lines)
+            output_text += line + '\n'
+
+        return output_text
+
+    @staticmethod
+    def parse_subckts(original_text_no_multiline: str) -> List[str]:
 
         subckt_names = []
         inside_subckt = False
-        lines = original_text_no_comments.splitlines()
+        lines = original_text_no_multiline.splitlines()
 
         for line in lines:
             if line.startswith('subckt '):
@@ -71,12 +86,26 @@ class SpectreNetlistParser:
     def remove_commands(original_text_no_subckts: str) -> str:
         output_text = ''
         lines = original_text_no_subckts.splitlines()
-        skip_line = False
+        empty_line = False
         for line in lines:
-            if any(cmd in line for cmd in SpectreNetlistParser.supported_commands):
-                # need to remove multilines first
+            cond = any(line.strip().startswith(cmd) for cmd in SpectreNetlistParser.supported_spectreCommands)
+            if cond:
                 continue
-            output_text += line + '\n'
+            cmd_line = ' '.join(line.split(' ')[1:]).strip()
+            cond = any(cmd_line.startswith(cmd) for cmd in SpectreNetlistParser.supported_commands)
+            if cond:
+                continue
+
+            if line:
+                empty_line = False
+
+            if not line and not empty_line:
+                empty_line = True
+                output_text += line + '\n'
+                continue
+
+            if not empty_line:
+                output_text += line + '\n'
 
         return output_text
 

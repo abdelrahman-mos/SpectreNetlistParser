@@ -10,7 +10,7 @@ class Netlist:
         # self.resistors_names: List[str] = []
         # self.mosfets_names: List[str] = []
         self.devices: List[Device] = []
-        self.capacitors_names: List[str] = []
+        # self.capacitors_names: List[str] = []
         self.commands: List[str] = []
         self.original_string: str = ''
 
