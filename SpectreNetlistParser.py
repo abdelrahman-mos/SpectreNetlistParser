@@ -15,11 +15,13 @@ class SpectreNetlistParser:
         original_text = output_netlist.original_string.lower()
         original_text_no_comments = SpectreNetlistParser.remove_comments(original_text)
         original_text_no_multiline = SpectreNetlistParser.remove_multilines(original_text_no_comments)
-        subckts_names = SpectreNetlistParser.parse_subckts_names(original_text_no_multiline)
+        subckts_names_texts = SpectreNetlistParser.parse_subckts_names_texts(original_text_no_multiline)
+        subckts_names = list(subckts_names_texts.keys())
         original_text_no_subckts = SpectreNetlistParser.remove_subckts(original_text_no_multiline)
         original_text_no_commands, commands = SpectreNetlistParser.remove_commands(original_text_no_subckts)
         highest_hierarchy_devices = SpectreNetlistParser.parse_highest_hierarchy(original_text_no_commands,
                                                                                  subckts_names)
+        # parsed_total_devices = SpectreNetlistParser.parse_subckts()
         output_netlist.subckts_names = subckts_names
         output_netlist.devices = highest_hierarchy_devices
         output_netlist.commands = commands
@@ -51,29 +53,36 @@ class SpectreNetlistParser:
         return output_text
 
     @staticmethod
-    def parse_subckts_names(original_text_no_multiline: str) -> List[str]:
+    def parse_subckts_names_texts(original_text_no_multiline: str) -> Dict[str, str]:
 
-        subckt_names = []
-        inside_subckt = False
         lines = original_text_no_multiline.splitlines()
+        subckts = {}
+        inside_subckt = False
+        tmp_subckt_text = ''
+        subckt_name = ''
 
         for line in lines:
             if line.startswith('subckt '):
                 inside_subckt = True
                 subckt_name = line.split(' ')[1]
-                subckt_names.append(subckt_name)
 
             elif line.startswith('ends '):
                 inside_subckt = False
+                tmp_subckt_text += line + '\n'
+                if subckt_name:
+                    subckts[subckt_name] = tmp_subckt_text
+                tmp_subckt_text = ''
 
-        return subckt_names
+            if inside_subckt:
+                tmp_subckt_text += line + '\n'
+
+        return subckts
 
     @staticmethod
     def remove_subckts(original_text: str) -> str:
         lines = original_text.splitlines()
         output_text = ''
         inside_subckt = False
-
         for line in lines:
             if line.startswith('subckt '):
                 inside_subckt = True
