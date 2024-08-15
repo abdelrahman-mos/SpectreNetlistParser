@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from Netlist import Netlist
 from Device import Device
 
@@ -6,7 +6,7 @@ from Device import Device
 class SpectreNetlistParser:
     supported_analogLib = ['vsource', 'resistor', 'vcvs', 'cvcs', 'cccs', 'ccvs', 'capacitor', 'transformer']
     supported_modelnames = ['nch', 'pch', 'nch_lvt', 'pch_lvt']
-    supported_spectreCommands = ['include', 'simulator', 'global', 'parameters']
+    supported_spectreCommands = ['include', 'simulator', 'global', 'parameters', 'save']
     supported_commands = ['tran', 'dc', 'ac', 'info', 'noise', 'xf', 'pss', 'options']
 
     @staticmethod
@@ -17,11 +17,12 @@ class SpectreNetlistParser:
         original_text_no_multiline = SpectreNetlistParser.remove_multilines(original_text_no_comments)
         subckts_names = SpectreNetlistParser.parse_subckts(original_text_no_multiline)
         original_text_no_subckts = SpectreNetlistParser.remove_subckts(original_text_no_multiline)
-        original_text_no_commands = SpectreNetlistParser.remove_commands(original_text_no_subckts)
+        original_text_no_commands, commands = SpectreNetlistParser.remove_commands(original_text_no_subckts)
         highest_hierarchy_devices = SpectreNetlistParser.parse_highest_hierarchy(original_text_no_commands,
                                                                                  subckts_names)
         output_netlist.subckts_names = subckts_names
         output_netlist.devices = highest_hierarchy_devices
+        output_netlist.commands = commands
         return output_netlist
 
     @staticmethod
@@ -85,17 +86,20 @@ class SpectreNetlistParser:
         return output_text
 
     @staticmethod
-    def remove_commands(original_text_no_subckts: str) -> str:
+    def remove_commands(original_text_no_subckts: str) -> Tuple[str, List[str]]:
         output_text = ''
+        commands: List[str] = []
         lines = original_text_no_subckts.splitlines()
         empty_line = False
         for line in lines:
             cond = any(line.strip().startswith(cmd) for cmd in SpectreNetlistParser.supported_spectreCommands)
             if cond:
+                commands.append(line)
                 continue
             cmd_line = ' '.join(line.split(' ')[1:]).strip()
             cond = any(cmd_line.startswith(cmd) for cmd in SpectreNetlistParser.supported_commands)
             if cond:
+                commands.append(line)
                 continue
 
             if line:
@@ -109,7 +113,7 @@ class SpectreNetlistParser:
             if not empty_line:
                 output_text += line + '\n'
 
-        return output_text
+        return output_text, commands
 
     @staticmethod
     def parse_highest_hierarchy(original_text_no_commands: str, subckts_names: List[str]) -> List[Device]:
