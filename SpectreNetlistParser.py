@@ -18,8 +18,10 @@ class SpectreNetlistParser:
         subckts_names = SpectreNetlistParser.parse_subckts(original_text_no_multiline)
         original_text_no_subckts = SpectreNetlistParser.remove_subckts(original_text_no_multiline)
         original_text_no_commands = SpectreNetlistParser.remove_commands(original_text_no_subckts)
-        highest_hierarchy_devices = SpectreNetlistParser.parse_highest_hierarchy(original_text_no_commands, subckts_names)
+        highest_hierarchy_devices = SpectreNetlistParser.parse_highest_hierarchy(original_text_no_commands,
+                                                                                 subckts_names)
         output_netlist.subckts_names = subckts_names
+        output_netlist.devices = highest_hierarchy_devices
         return output_netlist
 
     @staticmethod
@@ -41,9 +43,9 @@ class SpectreNetlistParser:
         for line in netlist_lines:
             if line.endswith("\\"):
                 while line.endswith("\\"):
-                    output_text += line[:-1].strip()
+                    output_text += line[:-1].strip() + ' '
                     line = next(netlist_lines)
-            output_text += line + '\n'
+            output_text += line.strip() + '\n'
 
         return output_text
 
@@ -110,8 +112,43 @@ class SpectreNetlistParser:
         return output_text
 
     @staticmethod
-    def parse_highest_hierarchy(original_text_no_subckts: str, subckts_names: List[str]) -> Dict[str, Dict]:
-        pass
+    def parse_highest_hierarchy(original_text_no_commands: str, subckts_names: List[str]) -> List[Device]:
+        lines = original_text_no_commands.splitlines()
+        output_devices: List[Device] = []
+        for line in lines:
+            line_no_braces = line.replace('( ', '(').replace(' )', ')').replace('(', '').replace(')', '')
+            split_equal_line = line_no_braces.strip().split('=')
+            split_line = split_equal_line[0].split(' ')
+
+            if len(split_equal_line) > 1:
+                device_model = split_line[-2]
+            else:
+                device_model = split_line[-1]
+
+            if not device_model:
+                continue
+
+            device_type = None
+            if device_model in subckts_names:
+                device_type = 'SubCircuit'
+
+            if device_model in SpectreNetlistParser.supported_analogLib:
+                device_type = 'AnalogLib'
+
+            if device_model in SpectreNetlistParser.supported_modelnames:
+                device_type = 'Mosfet'
+
+            if not device_type:
+                raise TypeError('Unsupported device')
+
+            device = Device()
+            device.model = device_model
+            device.name = split_line[0]
+            device.terminals = split_line[1:-2]
+            device.type = device_type
+            output_devices.append(device)
+
+        return output_devices
 
 
 if __name__ == '__main__':
