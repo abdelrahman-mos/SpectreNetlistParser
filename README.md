@@ -2,6 +2,7 @@
 A netlist parser for spectre netlists
 ## Future Work
 - Add terminals to already parsed subckts.
+  * This can be useful to apply nets mapping ?
 - Parse hierarchical subckts (can be recursive ?).
   * loop through all devices, if a subcircuit call parse_subckt with parent name as the subcircuit that was found.
   * all devices found in the subcircuit will have the model name as <parent_subcircuit>.<device_name>.
