@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 from Device import Device
 
 
@@ -7,7 +7,7 @@ class Netlist:
         self.netlist_path = path
         self.subckts_names: List[str] = []
         self.devices: List[Device] = []
-        self.full_devices: List[Device] = []
+        self.full_devices_dict: Dict[str, Device] = {}
         self.commands: List[str] = []
         self.original_string: str = ''
 
