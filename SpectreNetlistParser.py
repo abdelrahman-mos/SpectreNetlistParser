@@ -1,6 +1,6 @@
 from typing import List, Dict, Tuple
 from Netlist import Netlist
-from Device import Device
+from Device import Device, SubCircuit
 
 
 class SpectreNetlistParser:
@@ -21,7 +21,7 @@ class SpectreNetlistParser:
         original_text_no_commands, commands = SpectreNetlistParser.remove_commands(original_text_no_subckts)
         highest_hierarchy_devices = SpectreNetlistParser.parse_highest_hierarchy(original_text_no_commands,
                                                                                  subckts_names)
-        # parsed_total_devices = SpectreNetlistParser.parse_subckts()
+        parsed_total_devices = SpectreNetlistParser.parse_subckts(highest_hierarchy_devices, subckts_names_texts)
         output_netlist.subckts_names = subckts_names
         output_netlist.devices = highest_hierarchy_devices
         output_netlist.commands = commands
@@ -136,7 +136,7 @@ class SpectreNetlistParser:
         return output_devices
 
     @staticmethod
-    def parse_single_device(line: str, subckts_names: List[str]) -> Device:
+    def parse_single_device(line: str, subckts_names: List[str], parent_subckt='') -> Device:
         line_no_braces = line.replace('( ', '(').replace(' )', ')').replace('(', '').replace(')', '')
         split_equal_line = line_no_braces.strip().split('=')
         split_line = split_equal_line[0].split(' ')
@@ -162,12 +162,42 @@ class SpectreNetlistParser:
         if not device_type:
             raise TypeError('Unsupported device')
 
+        device_name = ''
+        if parent_subckt:
+            device_name += f'{parent_subckt}.'
+
         device = Device()
         device.model = device_model
-        device.name = split_line[0]
+        device.name = device_name + split_line[0]
         device.terminals = split_line[1:-2]
         device.type = device_type
         return device
+
+    @staticmethod
+    def parse_subckts(highest_hierarchy_devices: List[Device], subckts_names_texts: Dict[str, str]) -> List[Device]:
+        devices: List[Device] = []
+        # subckts_names = list(subckts_names_texts.keys())
+        for device in highest_hierarchy_devices:
+            if device.model in subckts_names_texts:
+                devices.extend(SpectreNetlistParser.parse_subckt('',device.name, device.model,
+                                                                 subckts_names_texts))
+        return devices
+
+    @staticmethod
+    def parse_subckt(parent_subckt: str, instance_name: str, subckt_name: str,
+                     subckt_names_texts: Dict[str, str]) -> List[Device]:
+        output_devices: List[Device] = []
+        subckt_names = list(subckt_names_texts.keys())
+        subckt_string = subckt_names_texts[subckt_name]
+        splitted_subckt_string = subckt_string.splitlines()
+        full_name = f'{parent_subckt}{"." if parent_subckt else ""}{instance_name}'
+        for line in splitted_subckt_string[1:-1]:
+            parsed_device = SpectreNetlistParser.parse_single_device(line, subckt_names, full_name)
+            if parsed_device.type == 'SubCircuit':
+                output_devices.extend(SpectreNetlistParser.parse_subckt(full_name, parsed_device.name,
+                                                                        parsed_device.model, subckt_names_texts))
+            output_devices.append(parsed_device)
+        return output_devices
 
 
 if __name__ == '__main__':
