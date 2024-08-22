@@ -6,11 +6,8 @@ class Netlist:
     def __init__(self, path: str):
         self.netlist_path = path
         self.subckts_names: List[str] = []
-        # self.vsources_names: List[str] = []
-        # self.resistors_names: List[str] = []
-        # self.mosfets_names: List[str] = []
         self.devices: List[Device] = []
-        # self.capacitors_names: List[str] = []
+        self.full_devices: List[Device] = []
         self.commands: List[str] = []
         self.original_string: str = ''
 

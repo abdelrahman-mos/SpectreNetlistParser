@@ -4,7 +4,7 @@ from Device import Device, SubCircuit
 
 
 class SpectreNetlistParser:
-    supported_analogLib = ['vsource', 'resistor', 'vcvs', 'cvcs', 'cccs', 'ccvs', 'capacitor', 'transformer']
+    supported_analogLib = ['vsource', 'isource', 'resistor', 'vcvs', 'cvcs', 'cccs', 'ccvs', 'capacitor', 'transformer']
     supported_modelnames = ['nch', 'pch', 'nch_lvt', 'pch_lvt']
     supported_spectreCommands = ['include', 'simulator', 'global', 'parameters', 'save']
     supported_commands = ['tran', 'dc', 'ac', 'info', 'noise', 'xf', 'pss', 'options']
@@ -19,11 +19,10 @@ class SpectreNetlistParser:
         subckts_names = list(subckts_names_texts.keys())
         original_text_no_subckts = SpectreNetlistParser.remove_subckts(original_text_no_multiline)
         original_text_no_commands, commands = SpectreNetlistParser.remove_commands(original_text_no_subckts)
-        highest_hierarchy_devices = SpectreNetlistParser.parse_highest_hierarchy(original_text_no_commands,
-                                                                                 subckts_names)
-        parsed_total_devices = SpectreNetlistParser.parse_subckts(highest_hierarchy_devices, subckts_names_texts)
+        output_netlist_devices = SpectreNetlistParser.parse_highest_hierarchy(original_text_no_commands, subckts_names)
+        output_netlist_devices.extend(SpectreNetlistParser.parse_subckts(output_netlist_devices, subckts_names_texts))
         output_netlist.subckts_names = subckts_names
-        output_netlist.devices = highest_hierarchy_devices
+        output_netlist.devices = output_netlist_devices
         output_netlist.commands = commands
         return output_netlist
 
@@ -150,7 +149,8 @@ class SpectreNetlistParser:
             return None
 
         device_type = None
-        if device_model in subckts_names:
+        is_subckt = device_model in subckts_names
+        if is_subckt:
             device_type = 'SubCircuit'
 
         if device_model in SpectreNetlistParser.supported_analogLib:
@@ -163,14 +163,18 @@ class SpectreNetlistParser:
             raise TypeError('Unsupported device')
 
         device_name = ''
-        if parent_subckt:
-            device_name += f'{parent_subckt}.'
+        # if parent_subckt:
+        #     device_name += f'{parent_subckt}.'
 
-        device = Device()
+        if is_subckt:
+            device = SubCircuit()
+        else:
+            device = Device()
         device.model = device_model
         device.name = device_name + split_line[0]
         device.terminals = split_line[1:-2]
         device.type = device_type
+        device.parent_subckt = parent_subckt
         return device
 
     @staticmethod
@@ -192,11 +196,15 @@ class SpectreNetlistParser:
         splitted_subckt_string = subckt_string.splitlines()
         full_name = f'{parent_subckt}{"." if parent_subckt else ""}{instance_name}'
         for line in splitted_subckt_string[1:-1]:
-            parsed_device = SpectreNetlistParser.parse_single_device(line, subckt_names, full_name)
-            if parsed_device.type == 'SubCircuit':
-                output_devices.extend(SpectreNetlistParser.parse_subckt(full_name, parsed_device.name,
-                                                                        parsed_device.model, subckt_names_texts))
+            parsed_device: Device = SpectreNetlistParser.parse_single_device(line, subckt_names, full_name)
             output_devices.append(parsed_device)
+
+            if parsed_device.type == 'SubCircuit':
+                parsed_device: SubCircuit
+                parsed_subckt_devices = SpectreNetlistParser.parse_subckt(full_name, parsed_device.name,
+                                                                          parsed_device.model, subckt_names_texts)
+                parsed_device.devices = parsed_subckt_devices
+                output_devices.extend(parsed_subckt_devices)
         return output_devices
 
 
