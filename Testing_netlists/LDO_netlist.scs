@@ -6,7 +6,7 @@
 simulator lang=spectre
 global 0 vdd!
 parameters VDD=1.2 VREF=0.6 COUT=1u IB=20u IL=1m R1=800k R2=400k
-include "/home/centos/tsmc65nm/models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt
+include "/home/centos/path/to/example/model.scs" section=tt
 
 // Library name: porting_65nm
 // Cell name: 5TOTA

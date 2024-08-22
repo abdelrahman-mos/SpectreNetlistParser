@@ -7,52 +7,7 @@ simulator lang=spectre
 global 0 vdd!
 parameters ISS=40u Period=800n VDD=1.2 VL=-VDD VH=VDD PW=0.5*Period \
     tr=PW/10 tf=PW/10
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_bip
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_33
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_mim
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_dnw
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_18
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_bip_npn
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_33
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfrtmom
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_mos_cap_25
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_18
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_disres
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_res
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_na
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmos_33
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_hvt
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmvar
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmos_18
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_na
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_na33
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_lvt
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfres_sa
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_na33
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_esd
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmim
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_25od33
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_25od33
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_mos_cap
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_25
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_25ud18
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_25
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmos
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_25ud18
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_na25od33
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfjvar
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmos_25
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rtmom
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_na25od33
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_dio_na25
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfres_rpo
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_hvt
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfind
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_rfmvar_25
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_na25
-include "/home/centos/tsmc65nm/tsmcN65/../models/spectre/crn65gplus_2d5_lk_v1d0.scs" section=tt_lvt
+include "/home/centos/path/to/example/model.scs" section=tt
 
 // Library name: porting_65nm
 // Cell name: WCM
